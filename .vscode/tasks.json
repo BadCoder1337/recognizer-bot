@@ -6,17 +6,22 @@
     {
       "label": "TF Apply",
       "type": "shell",
-      "command": "terraform apply -var-file=\".env\""
+      "command": "terraform apply -var-file .env"
     },
     {
       "label": "TF Plan",
       "type": "shell",
-      "command": "terraform plan -var-file=\".env\""
+      "command": "terraform plan -var-file .env"
     },
     {
       "label": "TF Init",
       "type": "shell",
       "command": "terraform init"
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "rm index.zip"
     }
   ]
 }

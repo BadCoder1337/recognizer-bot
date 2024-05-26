@@ -61,7 +61,6 @@ data "archive_file" "bundle" {
     filename = "requirements.txt"
     content  = file("requirements.txt")
   }
-
 }
 
 resource "yandex_function" "recognizer-bot" {
