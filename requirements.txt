@@ -1,1 +1,10 @@
-telebot
+certifi==2024.2.2
+charset-normalizer==3.3.2
+grpcio==1.64.0
+grpcio-tools==1.64.0
+idna==3.7
+protobuf==5.27.0
+pyTelegramBotAPI==4.18.1
+requests==2.32.2
+telebot==0.0.5
+urllib3==2.2.1

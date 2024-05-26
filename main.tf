@@ -28,6 +28,10 @@ provider "yandex" {
   folder_id = var.YC_FOLDER_ID
 }
 
+locals {
+  ignore = ["index.zip", ".git", ".vscode", ".terraform", "venv", ".env", "terraform.tfstate", "terraform.tfstate.backup"]
+}
+
 # SERVICE ACCOUNT
 
 resource "yandex_iam_service_account" "sa" {
@@ -53,14 +57,8 @@ resource "yandex_resourcemanager_folder_iam_member" "sa-functions-editor" {
 data "archive_file" "bundle" {
   type        = "zip"
   output_path = "index.zip"
-  source {
-    filename = "index.py"
-    content  = file("index.py")
-  }
-  source {
-    filename = "requirements.txt"
-    content  = file("requirements.txt")
-  }
+  source_dir  = "."
+  excludes    = local.ignore
 }
 
 resource "yandex_function" "recognizer-bot" {
@@ -75,7 +73,7 @@ resource "yandex_function" "recognizer-bot" {
     TELEGRAM_TOKEN = var.TELEGRAM_TOKEN
   }
   content {
-    zip_filename = "./index.zip"
+    zip_filename = "index.zip"
   }
 }
 

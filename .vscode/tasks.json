@@ -4,9 +4,14 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Build gRPC",
+      "type": "shell",
+      "command": "cd cloudapi && python -m grpc_tools.protoc -I . -I third_party/googleapis --python_out=. --grpc_python_out=. google/api/http.proto google/api/annotations.proto yandex/cloud/api/operation.proto google/rpc/status.proto yandex/cloud/operation/operation.proto yandex/cloud/validation.proto yandex/cloud/ai/stt/v3/stt_service.proto yandex/cloud/ai/stt/v3/stt.proto"
+    },
+    {
       "label": "TF Apply",
       "type": "shell",
-      "command": "terraform apply -var-file .env"
+      "command": "terraform apply -auto-approve -var-file .env"
     },
     {
       "label": "TF Plan",
@@ -17,11 +22,6 @@
       "label": "TF Init",
       "type": "shell",
       "command": "terraform init"
-    },
-    {
-      "label": "Clean",
-      "type": "shell",
-      "command": "rm index.zip"
     }
   ]
 }
