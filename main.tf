@@ -46,6 +46,12 @@ resource "yandex_resourcemanager_folder_iam_member" "sa-ai-editor" {
   folder_id = var.YC_FOLDER_ID
 }
 
+resource "yandex_resourcemanager_folder_iam_member" "sa-speechkit-stt-user" {
+  role      = "ai.speechkit-stt.user"
+  member    = "serviceAccount:${yandex_iam_service_account.sa.id}"
+  folder_id = var.YC_FOLDER_ID
+}
+
 resource "yandex_resourcemanager_folder_iam_member" "sa-functions-editor" {
   role      = "functions.editor"
   member    = "serviceAccount:${yandex_iam_service_account.sa.id}"
@@ -67,7 +73,7 @@ resource "yandex_function" "recognizer-bot" {
   runtime            = "python312"
   entrypoint         = "index.handler"
   memory             = "128"
-  execution_timeout  = "30"
+  execution_timeout  = "120"
   service_account_id = yandex_iam_service_account.sa.id
   environment = {
     TELEGRAM_TOKEN = var.TELEGRAM_TOKEN
